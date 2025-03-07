@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+
+    <section>
+      <p id="countDown">0</p>
+      <div class="buttons">
+        <button class="start_btn">Start</button>
+        <button class="reset_btn">Reset</button>
+        <button class="stop_btn">Stop</button>
+        <button class="time_btn">getTime</button>
+        <button class="clear_btn">clearTime</button>
+      </div>
+
+      <div>
+        <li>Jayesh Pansuriya</li>
+      </div>
+      <div class="resetValue"></div>
+      
+    </section>
+    <script>
+      let startcount = 0;
+      let intervalId;
+
+      const countDownElement = document.getElementById("countDown");
+      const resetValue = document.querySelector(".resetValue");
+
+      document.querySelector(".start_btn").addEventListener("click", startTimer);
+      document.querySelector(".reset_btn").addEventListener("click", resetCount);
+      document.querySelector(".stop_btn").addEventListener("click", stopCount);
+      document.querySelector(".time_btn").addEventListener("click", getTime);
+      document.querySelector(".clear_btn").addEventListener("click", clearTime);
+
+      function startTimer() {
+        if (!intervalId) {
+          intervalId = setInterval(() => {
+            countDownElement.innerText = startcount++;
+          }, 1000);
+        }
+      }
+
+      function stopCount() {
+        clearInterval(intervalId);
+        intervalId = null;
+      }
+
+      function resetCount() {
+        stopCount();
+        startcount = 0;
+        countDownElement.innerText = startcount;
+      }
+
+      function getTime() {
+        const newpara = document.createElement("p");
+        newpara.innerText = `Current Time: ${startcount -1 }  `;
+        resetValue.appendChild(newpara);
+        // resetValue.innerText = `Current Time: ${startcount -1 }  `;
+      }
+
+      function clearTime() {
+        resetValue.innerText = "";
+      }
+    </script>
+  </body>
+</html>
